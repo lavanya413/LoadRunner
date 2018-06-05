@@ -1,0 +1,133 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue;\f2\froman\fcharset0 Times-Roman;
+\f3\fnil\fcharset0 Calibri;}
+{\colortbl;\red255\green255\blue255;\red53\green53\blue53;\red0\green0\blue0;\red0\green0\blue233;
+\red255\green251\blue149;\red252\green34\blue117;}
+{\*\expandedcolortbl;;\cssrgb\c27059\c27059\c27059;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c93333;
+\cssrgb\c100000\c98039\c64706;\cssrgb\c100000\c25490\c53333;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 \ul \ulc0 Load Runner performance and Splunk Queries:
+\b0 \ulnone \
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f1 \cf2 \expnd0\expndtw0\kerning0
+apimp_log : application logs
+\f2 \cf3 \
+
+\f1 \cf2 access_common_apimp : Server logs
+\f2 \cf3 \
+\
+To test AA call in user profile \
+\
+index=* WFN_test sourcetype=apimp_log Marketplace \
+\
+Gateway Usage in production Dashboard \
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://dc1prhcmmktpl58.whc.dc01.us.adp/en-US/app/splunk_ps_analytics/ca_api_gateway_api_metrics?form.field1.earliest=%40d&form.field1.latest=now&form.span=5m&form.urlPath=*&form.L7HOST=*"}}{\fldrslt \cf4 \ul \ulc4 http://dc1prhcmmktpl58.whc.dc01.us.adp/en-US/app/splunk_ps_analytics/ca_api_gateway_api_metrics?form.field1.earliest=%40d&form.field1.latest=now&form.span=5m&form.urlPath=*&form.L7HOST=*}}\
+\
+\
+Dashboard: \
+\
+Mircro service availability dash board by CARL \
+\
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://dc1prhcmmktpl58.whc.dc01.us.adp/en-GB/app/splunk_ps_analytics/microservices_status_by_server"}}{\fldrslt \cf4 \ul \ulc4 http://dc1prhcmmktpl58.whc.dc01.us.adp/en-GB/app/splunk_ps_analytics/microservices_status_by_server}}\
+\
+MKPL Application monitoring Dashboard \
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://dc1prhcmmktpl58.whc.dc01.us.adp/en-GB/app/microservices/monitoring#en-GB/app/microservices/monitoring"}}{\fldrslt \cf4 \ul \ulc4 http://dc1prhcmmktpl58.whc.dc01.us.adp/en-GB/app/microservices/monitoring#en-GB/app/microservices/monitoring}}\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b \cf3 \ul \ulc3 Searching with specific response code:
+\b0 \ulnone \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs29\fsmilli14667 \cf3 index=* /core/v1/event-notification-messages sourcetype=ssg_traffic http_status=503\
+\
+
+\b \ul Performance Queries:\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f2\b0\fs24 \cf3 \ulnone Splunk query: \
+index=* a7fc50c4-5abc-40f9-a9c4-509b95abbad0\'a0\'a0sourcetype=ssg_gso | bucket span=1m _time\'a0\'a0| stats\'a0\'a0count by _time \
+index=* a7fc50c4-5abc-40f9-a9c4-509b95abbad0 sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | timechart span=1s count by result \
+\
+Query to eliminate results with 0's: \
+index=* BaseLine_test2_B2B sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=1s _time | stats count by _time result | where count > 0 | xyseries _time,result,count \
+\
+Query to see the traffic: \
+index=* sourcetype=ssg_gso NOT /auth/oauth/v2/token NOT /hr/v2/workers/G3YMY6WNZV1T8QPP | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=15m _time | stats count(result) by _time \
+\
+Connection\'a0\'a0Test: \
+index=* TuesdayTest3 141af2ef-c2cc-48a2-829e-ee701c7adc8d sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=1m _time | stats count by _time result | where count > 0 | xyseries _time,result,count \
+\
+Concurrency Test: \
+index=* Concurrency_Tuesday_test1\'a0 141af2ef-c2cc-48a2-829e-ee701c7adc8d sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=2s _time | stats count by _time result | where count > 0 | xyseries _time,result,count \
+\
+Query to see the 429 Failure count: \
+index=*\'a0\'a0\{Txnid\}\'a0\'a0"went over rate limit" sourcetype=ssg_gso \
+\
+To see the reason for failure: \
+index=* IAT_180CPM_131* e50c3769-a28b-4109-b827-c54f5bd6b3d7 "Throttle" sourcetype=ssg | stats\'a0 count by _time throttleType \
+\
+To see the concurrency and rate limit counters: \
+Splunk query: index=* IAT_180CPM_131* e50c3769-a28b-4109-b827-c54f5bd6b3d7 "Custom Rate Limit query" "requestsRemaining" sourcetype=ssg|bucket span=1m _time|stats count by _time concurrency requestsRemaining \
+To monitor traffic: \
+index=mkpl_ssg com.l7tech.traffic\'a0\'a0\{api\}|timechart span 1m\'a0\'a0avg(elapsedTime) \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf3 \cb5 B2b Pass/fail:\cf3 \cb1 \
+\
+\cf3 \cb5 index=* IAT_60CPM_1_189* 52d1e11f-277e-4cd8-bf1c-a50f3e7bff89 sourcetype=ssg_gso_ipe | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=1m _time | stats count by _time result | where count > 0 | xyseries _time,result,count\cf3 \cb1 \
+\cf3 \cb5 Request remaining and concurrency counters:\cf3 \cb1 \
+\
+\cf3 \cb5 index=* IAT_60CPM_1_189* 52d1e11f-277e-4cd8-bf1c-a50f3e7bff89\'a0\'a0"requestsRemaining" sourcetype=ssg|bucket span=1m _time|stats count by _time concurrency requestsRemaining\'97\'a0\cf3 \cb1 \
+\cf3 \cb5 Disabled in IAT.\cf3 \cb1 \
+\cf3 \cb5 Rate Limit:\cf3 \cb1 \
+\cf3 \cb5 index=* IAT_60CPM_1_189* 52d1e11f-277e-4cd8-bf1c-a50f3e7bff89 "Custom Rate Limit exceeded" sourcetype=ssg|bucket span=1m _time|stats count by _time\cf3 \cb1 \
+\cf3 \cb5 index=* IAT_60CPM_1_189* 52d1e11f-277e-4cd8-bf1c-a50f3e7bff89 "passed the rate limit" sourcetype=ssg|bucket span=1s _time|stats count by _time\cf3 \cb1 \
+\
+\cf3 \cb5 Concurrency:\cf3 \cb1 \
+\
+\cf3 \cb5 index=* IAT_60CPM_1_189* 52d1e11f-277e-4cd8-bf1c-a50f3e7bff89 "Custom Concurrency Limit exceeded" sourcetype=ssg|bucket span=1m _time|stats count by _time\cf3 \cb1 \
+\cf3 \cb5 index=* IAT_180CPM_3_196* e50c3769-a28b-4109-b827-c54f5bd6b3d7 "Throttle" sourcetype=ssg | bucket span=1m _time|stats count by _time throttleType\cf3 \cb1 \
+\
+\cf3 \cb5 Latest log for\'a0concurrency exceeded:\cf3 \cb1 \
+\cf3 \cb5 index=* 0b2b130d-e468-44be-9aeb-0a01af380efc sourcetype=ssg "Throttle Failure" "com.l7tech.log.custom.audit2log"| stats count by _time\cf3 \cb1 \
+\
+\cf3 \cb5 Query gave to Mahesh:\cf3 \cb1 \
+\cf3 \cb5 index=* beeaf2b0-acc2-4dc5-ad03-bb0b2b9008be sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | bucket span=1m _time| stats count by _time result | where count>0 | xyseries _time,result,count\cf3 \cb1 \
+\
+Splunk query to search 403 errors: \
+\
+index=* 12faaad9-934c-4a14-bf56-ee28910f1e32 IAT_Whitelist_Test_* sourcetype=ssg responseHttpStatus=0 \
+\
+index=mkpl_ssg "did not present a proper\'94 Root \
+index=* sourcetype="ssg*" source="*ssg*"\'a0 \
+| search ("Request Headers" AND "com.l7tech.log.custom.audit2log")\'a0 \
+| rex "\\[(?<Corr_ID>.*)\\]\'94 \
+\
+index=mkpl_ssg\'a0\'93Rate limit query\'94|table concurrency\'a0\'a0requestsRemaining \'a0_raw \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf6 Latest Splunk logs related to concurrency assertion:\cf3 \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\b \cf6 \ul \ulc6 Total execution:
+\b0 \cf3 \ulnone  \cf6 index=* test112* 0b2b130d-e468-44be-9aeb-0a01af380efc sourcetype=ssg_gso | eval result=if(like(_raw,"%Success%"),"Success","Failure") | stats count by _time result | where count >0 | xyseries _time,result,count\cf3  \
+
+\b \cf6 \ul Failure count:
+\b0 \ulnone index=* test112* 0b2b130d-e468-44be-9aeb-0a01af380efc 0b2b130d-e468-44be-9aeb-0a01af380efc sourcetype=ssg_gso \'93Failure"\cf3 \
+
+\b \cf6 \ul Concurrency Failure count by filtering with date time:
+\b0 \cf3 \ulnone \
+\cf6 index=* 0b2b130d-e468-44be-9aeb-0a01af380efc sourcetype=ssg "ConcurrencyLimit Exceeded" "com.l7tech.log.custom.audit2log"| stats count by _time\cf3 \
+\
+\cf6 Splunk query for load distribution of hosts:\cf3 \
+\cf6 index=ssg sourcetype=ssg_traffic | stats count by host\cf3 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \
+}
