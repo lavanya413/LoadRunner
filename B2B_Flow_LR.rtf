@@ -1,0 +1,220 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red19\green13\blue93;\red0\green0\blue0;\red221\green65\blue6;
+\red14\green110\blue109;\red148\green8\blue20;\red16\green125\blue2;\red0\green0\blue255;\red15\green112\blue1;
+\red12\green91\blue41;}
+{\*\expandedcolortbl;;\cssrgb\c9804\c9804\c43922;\cssrgb\c0\c0\c0;\cssrgb\c90196\c34118\c0;
+\cssrgb\c0\c50196\c50196;\cssrgb\c65490\c9804\c9804;\cssrgb\c0\c54902\c0;\cssrgb\c0\c0\c100000;\cssrgb\c0\c50196\c0;
+\cssrgb\c0\c42353\c21176;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f0\b\fs24 \cf2 \expnd0\expndtw0\kerning0
+Action
+\b0 \cf3 ()\
+\{\
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "--------------------------- B2B Call --------------------------------------------"\cf3 );\
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "This is the Consumer App: %s"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "1f0aeb13-6395-4cfb-a9b6-afa3ef17218b"\cf3 ));\
+\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "This is the client ID that is going to be executed: %s"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{CID\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "This is the Client secret that is going to be executed: %s"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{CS\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\cf4 web_set_max_html_param_len\cf3 (\cf5 "9999999"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\
+\cf4 web_set_certificate_ex\cf3 (\
+\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 CertFilePath\cf3 =
+\b \cf7 marketplace-api.pem
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 CertFormat\cf3 =
+\b \cf7 PEM
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 KeyFilePath\cf3 =
+\b \cf7 marketplace-api.pem
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 KeyFormat\cf3 =
+\b \cf7 PEM
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Password\cf3 =
+\b \cf7 adpadp
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 \'a0);\
+\'a0\'a0\'a0\
+\pard\pardeftab720\sl280\partightenfactor0
+\cf9 //\'a0\'a0\'a0\'a0lr_output_message("--------------------------- Token Call --------------------------------------------");\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 // set http headers\cf3 \
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_add_header\cf3 (\cf5 "content-type"\cf3 ,\'a0\cf5 "application/x-www-form-urlencoded"\cf3 );\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 // validate response\cf3 \
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_reg_find\cf3 (\cf5 "\cf6 Search\cf3 =
+\b \cf7 All
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 SaveCount\cf3 =
+\b \cf7 status
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Text/IC\cf3 =
+\b \cf7 HTTP/1.1 200 OK
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //fetching the access token value\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_reg_save_param\cf3 (\cf5 "acces_token_value"\cf3 ,\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 LB\cf3 =\cf5 \\"access_token\\":\\""\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 RB\cf3 =\cf5 \\""\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Search\cf3 =
+\b \cf7 Body
+\b0 \cf5 "\cf3 ,
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0// REST call\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_start_transaction\cf3 (\cf5 "Token_call"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_custom_request\cf3 (\cf5 "web_custom_request"\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 URL\cf3 =
+\b \cf7 https://api.adp.com/auth/oauth/v2/token
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Method\cf3 =
+\b \cf7 POST
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 TargetFrame\cf3 =\cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Resource\cf3 =
+\b \cf7 0
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Referer\cf3 =\cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Mode\cf3 =
+\b \cf7 HTTP
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Body\cf3 =\cf6 client_id\cf3 =\cf6 \{CID\}&client_secret\cf3 =\cf6 \{CS\}&grant_type\cf3 =
+\b \cf7 client_credentials
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf8 if\cf3 \'a0(
+\b \cf2 atoi
+\b0 \cf3 (\cf4 lr_eval_string\cf3 (\cf5 "\{status\}"\cf3 ))\'a0==\'a0\cf10 0\cf3 )\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\{\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_error_message\cf3 (\cf5 "Unable to generate the access token for client_id %s"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{CID\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_end_transaction\cf3 (\cf5 "Token_call"\cf3 ,\'a0
+\b \cf8 LR_FAIL
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\}\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "Token ID is: %s"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{acces_token_value\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_end_transaction\cf3 (\cf5 "Token_call"\cf3 ,\'a0
+\b \cf8 LR_AUTO
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //__________________________________Feaure Call_____________________________________________________\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 // Adding Headers\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_save_string\cf3 (\cf4 lr_eval_string\cf3 (\cf5 "Bearer \{acces_token_value\}"\cf3 ),\'a0\cf5 "auth"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_save_string\cf3 (\cf4 lr_eval_string\cf3 (\cf5 "PROD_480CPM_B2B_255_\{txnid\}"\cf3 ),\'a0\cf5 "id"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_set_max_html_param_len\cf3 (\cf5 "9999999"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "This is AUTH value: %s"\cf3 ,\'a0\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{auth\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_output_message\cf3 (\cf5 "This is unique transaction id value: %s"\cf3 ,\'a0\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{id\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_add_header\cf3 (\cf5 "sm_transactionID"\cf3 ,\'a0\cf5 "\{id\}"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_add_header\cf3 (\cf5 "Authorization"\cf3 ,\'a0\cf4 lr_eval_string\cf3 (\cf5 "\{auth\}"\cf3 ));\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //validating the status codes\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_reg_find\cf3 (\cf5 "\cf6 Search\cf3 =
+\b \cf7 All
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 SaveCount\cf3 =
+\b \cf7 status1
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Text/IC\cf3 =
+\b \cf7 HTTP/1.1 204 No Content
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_reg_find\cf3 (\cf5 "\cf6 Search\cf3 =
+\b \cf7 All
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 SaveCount\cf3 =
+\b \cf7 status2
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Text/IC\cf3 =
+\b \cf7 HTTP/1.1 200 OK
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //validating the response\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0web_reg_save_param("WFN_Worker_AOID",\'a0\cf3 \
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0"LB=\\"associateOID\\":\\"",\cf3 \
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0"RB=\\"",\cf3 \
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0"Search=Body",\cf3 \
+\cf9 //\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0LAST);\cf3 \
+\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //REST Call\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_start_transaction\cf3 (\cf5 "B2B_Feature_call"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //lr_rendezvous("B2B_300cpm_30_concurrency");\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 web_custom_request\cf3 (\cf5 "web_custom_request"\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 URL\cf3 =
+\b \cf7 \{Feature\}
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Method\cf3 =
+\b \cf7 GET
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 TargetFrame\cf3 =\cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Resource\cf3 =
+\b \cf7 0
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Referer\cf3 =\cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Mode\cf3 =
+\b \cf7 HTTP
+\b0 \cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf5 "\cf6 Body\cf3 =\cf5 "\cf3 ,\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0
+\b \cf8 LAST
+\b0 \cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf8 if\cf3 \'a0((
+\b \cf2 atoi
+\b0 \cf3 (\cf4 lr_eval_string\cf3 (\cf5 "\{status1\}"\cf3 )))\'a0==\'a0\cf10 1\cf3 \'a0||\'a0(
+\b \cf2 atoi
+\b0 \cf3 (\cf4 lr_eval_string\cf3 (\cf5 "\{status2\}"\cf3 )))\'a0==\'a0\cf10 1\cf3 )\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\{\
+\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_end_transaction\cf3 (\cf5 "B2B_Feature_call"\cf3 ,\'a0
+\b \cf8 LR_AUTO
+\b0 \cf3 );\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\}\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf8 else\cf3 \{\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_error_message\cf3 (\cf5 " Feature call got failed"\cf3 );\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf4 lr_end_transaction\cf3 (\cf5 "B2B_Feature_call"\cf3 ,\'a0
+\b \cf8 LR_FAIL
+\b0 \cf3 );\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\cf9 //lr_output_message("Worker AOID in the response is: %s", lr_eval_string("\{WFN_Worker_AOID\}"));\cf3 \
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\}\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\
+\} }
